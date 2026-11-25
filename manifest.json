@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "OmniModel — Pixel AI Switcher",
   "version": "0.1.0",
-  "description": "Pixel-art AI launcher for ChatGPT with local Ollama and DeepSeek models.",
+  "description": "Select ChatGPT, DeepSeek, Claude, Gemini, Qwen or local Ollama directly above the ChatGPT composer.",
   "permissions": [
     "storage",
     "tabs"
@@ -11,7 +11,11 @@
     "https://chatgpt.com/*",
     "https://chat.openai.com/*",
     "http://localhost:11434/*",
-    "http://127.0.0.1:11434/*"
+    "http://127.0.0.1:11434/*",
+    "https://api.deepseek.com/*",
+    "https://api.anthropic.com/*",
+    "https://generativelanguage.googleapis.com/*",
+    "https://dashscope-intl.aliyuncs.com/*"
   ],
   "action": {
     "default_title": "OmniModel",
@@ -42,5 +46,9 @@
       "id": "omnimodel@s1nnrockk",
       "strict_min_version": "109.0"
     }
+  },
+  "options_ui": {
+    "page": "settings.html",
+    "open_in_tab": true
   }
 }
