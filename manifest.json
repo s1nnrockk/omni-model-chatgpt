@@ -3,15 +3,42 @@
   "name": "OmniModel — Pixel AI Switcher",
   "version": "0.1.0",
   "description": "Pixel-art AI launcher for ChatGPT with local Ollama and DeepSeek models.",
-  "permissions": ["storage", "tabs"],
-  "host_permissions": ["https://chatgpt.com/*", "https://chat.openai.com/*", "http://localhost:11434/*", "http://127.0.0.1:11434/*"],
-  "action": { "default_title": "OmniModel", "default_popup": "popup.html" },
-  "background": { "service_worker": "background.js" },
-  "content_scripts": [{
-    "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*"],
-    "js": ["content.js"],
-    "css": ["pixel.css"],
-    "run_at": "document_idle"
-  }],
-  "browser_specific_settings": { "gecko": { "id": "omnimodel@s1nnrockk", "strict_min_version": "109.0" } }
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://chat.openai.com/*",
+    "http://localhost:11434/*",
+    "http://127.0.0.1:11434/*"
+  ],
+  "action": {
+    "default_title": "OmniModel",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "omnimodel@s1nnrockk",
+      "strict_min_version": "109.0"
+    }
+  }
 }
