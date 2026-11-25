@@ -26,11 +26,10 @@ jobs:
           data["background"] = {"service_worker": "background.js"}
           with open(path, "w") as f:
               json.dump(data, f, indent=2)
-              f.write("\\n")
+              f.write("\n")
           PY
-          cd dist
-          zip -r omnimodel-firefox.zip firefox/*
-          zip -r omnimodel-chrome.zip chrome/*
+          (cd dist/firefox && zip -r ../omnimodel-firefox.zip .)
+          (cd dist/chrome && zip -r ../omnimodel-chrome.zip .)
       - uses: actions/upload-artifact@v4
         with:
           name: omnimodel-browser-builds
