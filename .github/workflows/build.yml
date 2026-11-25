@@ -10,14 +10,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate manifest
-        run: python -c "import json; m=json.load(open('manifest.json')); assert m['manifest_version']==3"
-      - name: Package extension
+      - name: Validate Firefox manifest
+        run: python -c "import json; m=json.load(open('manifest.json')); assert m['manifest_version']==3; assert m['background'].get('scripts') == ['background.js']"
+      - name: Package Firefox and Chrome builds
         run: |
-          mkdir -p dist
-          zip -r dist/omnimodel-firefox-chrome.zip manifest.json background.js content.js content.css pixel.css popup.html popup.js chat.html chat.js README.md
+          mkdir -p dist/firefox dist/chrome
+          files="background.js content.js content.css pixel.css popup.html popup.js chat.html chat.js README.md"
+          cp manifest.json dist/firefox/manifest.json
+          for file in $files; do cp "$file" dist/firefox/; done
+          cp -r dist/firefox/. dist/chrome/
+          python - <<'PY'
+          import json
+          path = "dist/chrome/manifest.json"
+          data = json.load(open(path))
+          data["background"] = {"service_worker": "background.js"}
+          with open(path, "w") as f:
+              json.dump(data, f, indent=2)
+              f.write("\\n")
+          PY
+          cd dist
+          zip -r omnimodel-firefox.zip firefox/*
+          zip -r omnimodel-chrome.zip chrome/*
       - uses: actions/upload-artifact@v4
         with:
-          name: omnimodel-firefox-chrome
-          path: dist/omnimodel-firefox-chrome.zip
+          name: omnimodel-browser-builds
+          path: dist/*.zip
           if-no-files-found: error
