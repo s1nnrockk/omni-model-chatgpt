@@ -42,3 +42,7 @@ GitHub Actions creates a ZIP on pushes to main and manual runs. Download it from
 
 ## Scope
 The extension adds its own local chat and shortcuts. It cannot replace ChatGPT's server-side model selector or turn a ChatGPT request into a Claude/Gemini/DeepSeek request. Local chat requests go directly to Ollama on your machine.
+
+
+## In-page model selector
+A model selector is injected above the ChatGPT composer. Choose ChatGPT (native), DeepSeek, Claude, Gemini, Qwen, or local Ollama. Configure cloud API keys from the selector's ⚙ API button. Keys are stored in browser extension storage. Cloud API usage may be billed by the provider. External model answers appear as OmniModel response cards on the current page; they are not native ChatGPT conversation messages. Selecting ChatGPT leaves the normal ChatGPT send flow unchanged.
