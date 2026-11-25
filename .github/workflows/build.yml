@@ -1,0 +1,23 @@
+name: Build OmniModel
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate manifest
+        run: python -c "import json; m=json.load(open('manifest.json')); assert m['manifest_version']==3"
+      - name: Package extension
+        run: |
+          mkdir -p dist
+          zip -r dist/omnimodel-firefox-chrome.zip manifest.json background.js content.js pixel.css popup.html popup.js chat.html chat.js README.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: omnimodel-firefox-chrome
+          path: dist/omnimodel-firefox-chrome.zip
+          if-no-files-found: error

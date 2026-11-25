@@ -1,0 +1,9 @@
+const $=id=>document.getElementById(id);
+const messages=$("messages");
+function bubble(role,text){const el=document.createElement("div");el.className="bubble "+role;const name=document.createElement("b");name.textContent=role==="user"?"YOU":"MODEL";const body=document.createElement("p");body.textContent=text;el.append(name,body);messages.append(el);messages.scrollTop=messages.scrollHeight;return body;}
+async function check(){try{const r=await fetch("http://localhost:11434/api/tags",{signal:AbortSignal.timeout(2500)});if(!r.ok)throw 0;const d=await r.json();$("status").textContent="ONLINE · "+(d.models||[]).length+" MODELS";$("statusDot").className="dot on";for(const m of d.models||[]){if(![...$("model").options].some(o=>o.value===m.name)){const o=document.createElement("option");o.value=m.name;o.textContent=m.name;$("model").append(o);}}}catch{$("status").textContent="OFFLINE · START OLLAMA";$("statusDot").className="dot";}}
+$("refresh").onclick=check;
+$("promptForm").addEventListener("submit",async e=>{e.preventDefault();const prompt=$("prompt").value.trim();if(!prompt)return;$("prompt").value="";bubble("user",prompt);const answer=bubble("assistant","Подключаюсь к Ollama…");$("send").disabled=true;
+try{const res=await fetch("http://localhost:11434/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:$("model").value,messages:[{role:"user",content:prompt}],stream:false})});if(!res.ok)throw new Error("HTTP "+res.status+" — проверь, установлена ли модель");const data=await res.json();answer.textContent=data.message?.content||"Пустой ответ";}catch(err){answer.textContent="Не удалось выполнить запрос: "+err.message+". Установи Ollama и скачай выбранную модель (команды есть в README).";}finally{$("send").disabled=false;$("prompt").focus();}});
+$("prompt").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();$("promptForm").requestSubmit();}});
+check();

@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OmniModel</title><link rel="stylesheet" href="pixel.css"></head>
+<body class="popup"><header class="top"><div class="brand"><span class="pixel-mark">OM</span><div><b>OMNIMODEL</b><small>PIXEL AI HUB · v0.1</small></div></div><span class="led"></span></header>
+<main>
+<section class="card"><div class="section-title">SELECT YOUR MODEL</div><label for="model">Модель</label><select id="model"><optgroup label="LOCAL · OLLAMA"><option value="deepseek-r1:1.5b">DeepSeek R1 · 1.5B</option><option value="deepseek-r1:7b">DeepSeek R1 · 7B</option><option value="deepseek-coder:1.3b">DeepSeek Coder · 1.3B</option><option value="llama3.2:1b">Llama 3.2 · 1B</option><option value="qwen2.5:1.5b">Qwen 2.5 · 1.5B</option></optgroup></select>
+<div class="status-line"><span id="statusDot" class="dot"></span><span id="status">Проверяю Ollama…</span><button id="refresh" class="mini">CHECK</button></div>
+<button id="openChat" class="primary">OPEN PIXEL CHAT ↗</button></section>
+<section class="card"><div class="section-title">FREE WEB PORTALS</div><p class="hint">Открывают официальные сайты. Доступность и лимиты определяет сам сервис.</p><div class="portal-grid"><button data-url="https://chat.deepseek.com/">DEEPSEEK ↗</button><button data-url="https://gemini.google.com/">GEMINI ↗</button><button data-url="https://claude.ai/">CLAUDE ↗</button><button data-url="https://chat.qwen.ai/">QWEN ↗</button></div></section>
+<footer>LOCAL MODE = NO API BILL · YOUR PC, YOUR MODEL</footer></main><script src="popup.js"></script></body></html>
