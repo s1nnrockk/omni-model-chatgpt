@@ -15,7 +15,7 @@ jobs:
       - name: Package extension
         run: |
           mkdir -p dist
-          zip -r dist/omnimodel-firefox-chrome.zip manifest.json background.js content.js pixel.css popup.html popup.js chat.html chat.js README.md
+          zip -r dist/omnimodel-firefox-chrome.zip manifest.json background.js content.js content.css pixel.css popup.html popup.js chat.html chat.js README.md
       - uses: actions/upload-artifact@v4
         with:
           name: omnimodel-firefox-chrome
