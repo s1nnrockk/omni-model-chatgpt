@@ -15,7 +15,7 @@ jobs:
       - name: Package Firefox and Chrome builds
         run: |
           mkdir -p dist/firefox dist/chrome
-          files="background.js content.js content.css pixel.css popup.html popup.js chat.html chat.js README.md"
+          files="background.js content.js content.css pixel.css popup.html popup.js chat.html chat.js settings.html options.js README.md"
           cp manifest.json dist/firefox/manifest.json
           for file in $files; do cp "$file" dist/firefox/; done
           cp -r dist/firefox/. dist/chrome/
